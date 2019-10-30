@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+        app:startDestination="@id/welcome">
+
+    <fragment
+        android:id="@+id/welcome"
+        android:name="com.app.aiicapinvest.Welcome"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome">
+
+        <action
+            android:id="@+id/action_welcome_to_onboard"
+            app:destination="@id/onboard"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboard"
+        android:name="com.app.aiicapinvest.Onboard"
+        android:label="fragment_onboard"
+        tools:layout="@layout/fragment_onboard">
+
+        <action
+            android:id="@+id/action_onboard_to_signUp"
+            app:destination="@id/signUp"
+        />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.app.aiicapinvest.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+
+        <action
+            android:id="@+id/action_signUp_to_login"
+            app:destination="@id/login"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.app.aiicapinvest.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/home"/>
+    </fragment>
+
+    <activity
+        android:id="@+id/home"
+        android:name="com.app.aiicapinvest.Home"
+        android:label="Home"/>
+</navigation>

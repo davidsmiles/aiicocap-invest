@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_color"
+    android:paddingStart="@dimen/twenty"
+    android:paddingTop="@dimen/twenty"
+    android:paddingEnd="@dimen/ten"
+    android:paddingBottom="@dimen/five">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:src="@drawable/davidugbero"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="David Ugbero"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="@dimen/ten"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/email_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ugberodavid@gmail.com"
+        android:textColor="@color/white"
+        android:layout_below="@id/user_name"
+    />
+
+</RelativeLayout>
