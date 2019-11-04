@@ -14,7 +14,7 @@ object API {
 
     fun login(user_id: String, password: String) = "${URL}/login"
 
-    fun makeApiCall(url: URL): String? {
+    fun makeApiCall(url: URL, method: String = "POST", json: String = ""): String? {
         var jsonResponse: String? = null
         var urlConnection: HttpURLConnection? = null
         var inputStream: InputStream? = null
@@ -23,25 +23,21 @@ object API {
         try {
             urlConnection = url.openConnection() as HttpURLConnection
             urlConnection.apply {
-                requestMethod = "POST"
+                requestMethod = method
                 connectTimeout = 10000
-              //  addRequestProperty("Content-Type", "application/json")
-              //  setRequestProperty("Content-Type", "application/json");
 
                 setRequestProperty("Accept", "application/json")
+                setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
                 doInput = true
                 doOutput = true
-                setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
                 connect()
             }
-            val out = "{" +
-                    "\"firstname\":\"davido\"," +
-                    "\"lastname\":\"ugbero\"," +
-                    "\"email\":\"ugberodavid@gmail.com\"," +
-                    "\"password\":\"ugbero\"" +
-                    "}"
-            outputStream = urlConnection.outputStream
-            outputStream.write(out.toByteArray(), 0, out.length)
+
+            if(method.contentEquals("POST"))
+                outputStream = urlConnection.outputStream
+                outputStream!!.write(json.toByteArray(), 0, json.length)
 
             inputStream = urlConnection.inputStream
 

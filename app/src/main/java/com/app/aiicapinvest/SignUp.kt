@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.android.synthetic.main.header_layout.*
+import org.json.JSONObject
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.*
@@ -42,9 +44,19 @@ class SignUp : Fragment(), View.OnClickListener {
     override fun onClick(view: View?) {
         when(view!!.id){
             sign_up.id -> {
-                Toast.makeText(context, "signup clicked", Toast.LENGTH_SHORT).show()
-                val jsonInputString = "{'firstname': 'David'}"
-                Signup(context!!).execute(jsonInputString)
+                val firstname = "${firstname.text}"
+                val lastname = "${lastname.text}"
+                val email = "${email_address.text}"
+                val phone = "${phone.text}"
+                val password = "${confirm_password.text}"
+
+                val payload = JSONObject()
+                payload.put("firstname", firstname)
+                payload.put("lastname", lastname)
+                payload.put("email", email)
+                payload.put("password", password)
+
+                Signup(context!!).execute(payload.toString())
             }
             login.id -> navController.navigate(R.id.action_signUp_to_login)
         }
@@ -65,7 +77,7 @@ class SignUp : Fragment(), View.OnClickListener {
                 .build()
         }
 
-        override fun doInBackground(vararg json: String): String? {
+        override fun doInBackground(vararg payload: String): String? {
 
             val signup = API.signup()
 
@@ -79,7 +91,7 @@ class SignUp : Fragment(), View.OnClickListener {
 
             publishProgress()
 
-            return API.makeApiCall(url!!)
+            return API.makeApiCall(url!!, json = payload[0])
         }
 
         override fun onProgressUpdate(vararg values: Void?) {
