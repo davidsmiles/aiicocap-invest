@@ -12,7 +12,7 @@ object API {
 
     fun signup() = "${URL}/signup"
 
-    fun login(user_id: String, password: String) = "${URL}/login"
+    fun login() = "${URL}/login"
 
     fun makeApiCall(url: URL, method: String = "POST", json: String = ""): String? {
         var jsonResponse: String? = null
