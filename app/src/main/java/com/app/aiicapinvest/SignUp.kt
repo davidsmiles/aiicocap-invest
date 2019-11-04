@@ -67,19 +67,20 @@ class SignUp : Fragment(), View.OnClickListener {
 
         override fun doInBackground(vararg json: String): String? {
 
-            val signup = API.signup()
-
-            var url: URL? = null
-
-            try {
-                url = URL(signup)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            }
+//            val signup = API.signup()
+//
+//            var url: URL? = null
+//
+//            try {
+//                url = URL(signup)
+//            } catch (e: MalformedURLException) {
+//                e.printStackTrace()
+//            }
 
             publishProgress()
 
-            return API.makeApiCall(url!!, json[0])
+            return API.uploadToServer().toString()
+        //    return API.makeApiCall(url!!, json[0])
         }
 
         override fun onProgressUpdate(vararg values: Void?) {

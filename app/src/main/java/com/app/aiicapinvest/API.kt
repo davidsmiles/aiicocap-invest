@@ -4,6 +4,10 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.Charset
+import org.json.JSONObject
+import org.json.JSONException
+
+
 
 
 object API {
@@ -65,6 +69,35 @@ object API {
         val reader = BufferedReader(inputStreamReader)
 
         return reader.readText()
+    }
+
+    @Throws(IOException::class, JSONException::class)
+    fun uploadToServer(): JSONObject {
+        val query = "https://aiicocap-restapi.herokuapp.com/signup"
+        val json = "{\"firstname\":david}"
+
+        val url = URL(query)
+        val conn = url.openConnection() as HttpURLConnection
+        conn.connectTimeout = 5000
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+        conn.doOutput = true
+        conn.doInput = true
+        conn.requestMethod = "POST"
+
+        val os = conn.outputStream
+        os.write(json.toByteArray(charset("UTF-8")))
+        os.close()
+
+        // read the response
+        val ins = BufferedInputStream(conn.inputStream)
+        val result = readFromStream(ins)
+        val jsonObject = JSONObject(result)
+
+
+        ins.close()
+        conn.disconnect()
+
+        return jsonObject
     }
 
 }
