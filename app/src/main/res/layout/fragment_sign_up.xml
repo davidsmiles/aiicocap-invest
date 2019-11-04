@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/confirmpassword"
             android:textSize="15sp"
+            android:inputType="textPassword"
             android:singleLine="true"
             android:background="@drawable/signup_edit"
             android:padding="10sp"

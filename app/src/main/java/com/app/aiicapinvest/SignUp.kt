@@ -46,9 +46,10 @@ class SignUp : Fragment(), View.OnClickListener {
             sign_up.id -> {
                 val firstname = "${firstname.text}"
                 val lastname = "${lastname.text}"
-                val email = "${email_address.text}"
+                val email = "${email.text}"
                 val phone = "${phone.text}"
-                val password = "${confirm_password.text}"
+                val password = "${password.text}"
+                val confirm_password = "${confirm_password.text}"
 
                 val payload = JSONObject()
                 payload.put("firstname", firstname)
