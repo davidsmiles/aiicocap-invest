@@ -1,15 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     tools:context=".ProfileFragment">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProfileFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/update_profile"
-        android:layout_centerInParent="true"
-    />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#cccccc"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_photo"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:src="@drawable/ic_profile"
+                android:padding="@dimen/five"
+                android:background="@drawable/plain_circle"
+                android:backgroundTint="#ccc"
+                android:layout_marginTop="@dimen/twentyfour"
+                app:civ_border_color="#ccc"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/add_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addnewphoto"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="@dimen/five"
+                android:layout_gravity="center"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cccccc"
+                android:layout_marginTop="@dimen/fifteen"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fifteen"
+                android:layout_marginStart="@dimen/twentyfour"
+                android:layout_marginEnd="@dimen/twentyfour">
+
+                <TextView
+                    android:id="@+id/personalinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personalinformation"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/twelve"
+                    android:layout_marginTop="@dimen/five"/>
+
+                <ImageView
+                    android:id="@+id/icon_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/icon_person"
+                    android:layout_alignBottom="@+id/fnlayout"
+                    android:layout_below="@+id/personalinfo"
+                    android:layout_marginTop="@dimen/fifteen"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fnlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_below="@id/personalinfo"
+                    android:layout_marginTop="@dimen/five"
+                    android:layout_marginStart="@dimen/twenty"
+                    android:layout_toEndOf="@+id/icon_person">
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="@string/firstname"
+                        android:singleLine="true"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/lnlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/five"
+                    android:layout_marginStart="@dimen/twenty"
+                    android:layout_below="@+id/fnlayout"
+                    android:layout_toEndOf="@+id/icon_person">
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="@string/lastname"
+                        android:singleLine="true"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icon_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_phone"
+                    android:layout_marginTop="@dimen/thirty"
+                    android:layout_below="@+id/lnlayout"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/five"
+                    android:layout_marginStart="@dimen/twenty"
+                    android:layout_below="@+id/lnlayout"
+                    android:layout_toEndOf="@+id/icon_phone">
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="@string/phone"
+                        android:singleLine="true"
+                        android:inputType="phone"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <ImageView
+                    android:id="@+id/icon_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_email"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:layout_below="@+id/phone_layout"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/twenty"
+                    android:layout_below="@+id/phone_layout"
+                    android:layout_toEndOf="@+id/icon_email">
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="@string/email"
+                        android:singleLine="true"
+                        android:inputType="textEmailAddress"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#cccccc"
+                android:layout_marginTop="@dimen/fifteen"
+                />
+
+            <LinearLayout
+                android:id="@+id/editpass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/ten"
+                android:paddingBottom="@dimen/ten">
+
+                <ImageView
+                    android:id="@+id/icon_edit_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_edit_password"
+                    android:layout_marginStart="@dimen/twentyfour"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editpassword"
+                    android:textColor="@color/colorAccent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_marginStart="@dimen/twenty"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#cccccc"
+                android:layout_marginTop="@dimen/fifteen"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

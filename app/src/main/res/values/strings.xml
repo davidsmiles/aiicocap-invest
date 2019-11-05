@@ -29,4 +29,7 @@
     <string name="withdraw">Withdraw</string>
     <string name="logout">Logout</string>
     <string name="withdrawals">Withdrawals</string>
+    <string name="addnewphoto">Add a new photo</string>
+    <string name="personalinformation">PERSONAL INFORMATION</string>
+    <string name="editpassword">Edit password</string>
 </resources>
