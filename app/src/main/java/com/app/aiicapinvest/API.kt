@@ -2,6 +2,7 @@ package com.app.aiicapinvest
 
 import java.io.*
 import java.net.HttpURLConnection
+import java.net.MalformedURLException
 import java.net.URL
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
@@ -14,14 +15,22 @@ object API {
 
     fun login() = "${URL}/login"
 
-    fun makeApiCall(url: URL, method: String = "POST", json: String = ""): String? {
+    fun makeApiCall(uri: String, method: String = "POST", json: String = ""): String? {
+        var url: URL? = null
+
+        try {
+            url = URL(uri)
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+
         var jsonResponse: String? = null
         var urlConnection: HttpURLConnection? = null
         var inputStream: InputStream? = null
         var outputStream: OutputStream? = null
 
         try {
-            urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection = url!!.openConnection() as HttpURLConnection
             urlConnection.apply {
                 requestMethod = method
                 connectTimeout = 10000

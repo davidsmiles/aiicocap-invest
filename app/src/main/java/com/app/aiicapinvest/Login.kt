@@ -73,17 +73,9 @@ class Login : Fragment(), View.OnClickListener {
 
             val login = API.login()
 
-            var url: URL? = null
-
-            try {
-                url = URL(login)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            }
-
             publishProgress()
 
-            return API.makeApiCall(url!!, json = payload[0])
+            return API.makeApiCall(login, json = payload[0])
         }
 
         override fun onProgressUpdate(vararg values: Void?) {

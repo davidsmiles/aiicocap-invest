@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -82,17 +83,9 @@ class SignUp : Fragment(), View.OnClickListener {
 
             val signup = API.signup()
 
-            var url: URL? = null
-
-            try {
-                url = URL(signup)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            }
-
             publishProgress()
 
-            return API.makeApiCall(url!!, json = payload[0])
+            return API.makeApiCall(signup, json = payload[0])
         }
 
         override fun onProgressUpdate(vararg values: Void?) {
@@ -106,14 +99,19 @@ class SignUp : Fragment(), View.OnClickListener {
 
             dialog.dismiss()
 
-            Toast.makeText(ctx, result.toString(), Toast.LENGTH_SHORT).show()
-
-//            if (result != null) {
-//                if(result.contains("true")){
-//                    val welcome = WelcomeSheet()
-//                    welcome.show(supportFragmentManager, "example")
-//                }
-//            }
+            val response = JSONObject(result!!)
+            if(response.has("email")){
+                Toast.makeText(ctx, response.getString("email"), Toast.LENGTH_SHORT).show()
+                navController.navigate(R.id.action_signUp_to_home)
+            }
+            /*
+            if (result != null) {
+                if(result.contains("true")){
+                    val welcome = WelcomeSheet()
+                    welcome.show(supportFragmentManager, "example")
+                }
+            }
+             */
         }
     }
 }
