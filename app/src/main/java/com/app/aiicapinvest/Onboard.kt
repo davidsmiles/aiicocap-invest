@@ -47,7 +47,7 @@ class Onboard : Fragment(){
      *  Then move Users straight to Login page without showing them the onboarding screens.
      */
     private fun pop(){
-        val file = File("${context!!.cacheDir.path}/cacheUser.txt")
+        val file = File("${context!!.cacheDir.path}/logged_in.txt")
         if(file.exists()) {
             val fw = FileReader(file)
             when (fw.readText()) {
