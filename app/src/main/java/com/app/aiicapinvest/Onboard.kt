@@ -1,6 +1,7 @@
 package com.app.aiicapinvest
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.app.aiicapinvest.adapters.Slider
 import kotlinx.android.synthetic.main.fragment_onboard.*
+import java.io.File
+import java.io.FileReader
 
 
 class Onboard : Fragment(){
@@ -34,7 +37,28 @@ class Onboard : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+        pop()
         setupViews()
+    }
+
+    /**
+     *  Decide if User has logged in before and take them to home page
+     *  if(file.exists) returns true if User has launched the App before and if true,
+     *  Then move Users straight to Login page without showing them the onboarding screens.
+     */
+    private fun pop(){
+        val file = File("${context!!.cacheDir.path}/cacheUser.txt")
+        if(file.exists()) {
+            val fw = FileReader(file)
+            when (fw.readText()) {
+                "true" -> {
+                    navController.navigate(R.id.action_onboard_to_home)
+                }
+                else -> {
+                    navController.navigate(R.id.action_onboard_to_login)
+                }
+            }
+        }
     }
 
     private fun setupViews(){

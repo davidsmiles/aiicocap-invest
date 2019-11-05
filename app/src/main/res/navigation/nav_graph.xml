@@ -28,6 +28,12 @@
             android:id="@+id/action_onboard_to_signUp"
             app:destination="@id/signUp"
         />
+        <action
+            android:id="@+id/action_onboard_to_home"
+            app:destination="@id/home" />
+        <action
+            android:id="@+id/action_onboard_to_login"
+            app:destination="@id/login" />
     </fragment>
 
     <fragment
@@ -53,6 +59,9 @@
         <action
             android:id="@+id/action_login_to_home"
             app:destination="@id/home"/>
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUp" />
     </fragment>
 
     <activity

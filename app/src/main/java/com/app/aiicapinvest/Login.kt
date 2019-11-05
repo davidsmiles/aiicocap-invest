@@ -15,12 +15,16 @@ import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
+import java.io.File
+import java.io.FileWriter
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.*
 
 
 class Login : Fragment(), View.OnClickListener {
+
+    var cacheUser = false
 
     lateinit var navController: NavController
 
@@ -37,6 +41,7 @@ class Login : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
 
         login.setOnClickListener(this)
+        sign_up.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -51,6 +56,7 @@ class Login : Fragment(), View.OnClickListener {
 
                 Login(context!!).execute(payload.toString())
             }
+            sign_up.id -> navController.navigate(R.id.action_login_to_signUp)
         }
     }
 
@@ -60,6 +66,9 @@ class Login : Fragment(), View.OnClickListener {
 
         override fun onPreExecute() {
             super.onPreExecute()
+
+            // Save User logged_in status to Cache
+            cacheUser()
 
             dialog = SpotsDialog.Builder()
                 .setContext(ctx)
@@ -95,5 +104,30 @@ class Login : Fragment(), View.OnClickListener {
                 navController.navigate(R.id.action_login_to_home)
             }
         }
+    }
+
+    /**
+     *  Snippet responsible for caching the User to ensure
+     *  consequent times the User doesn't need to login after the first time
+     */
+    private fun cacheUser() {
+        /**
+         *  Handling the Sessioning of the User
+         */
+        cacheUser = remember_me.isChecked
+
+        val file = File("${context!!.cacheDir.path}/logged_in.txt")
+        val fw = FileWriter(file)
+        fw.write(cacheUser.toString())
+        fw.close()
+    }
+
+    private fun write(){
+        val filename = "logged_in"
+        val fileContents = "true"
+        context!!.openFileOutput(filename, Context.MODE_PRIVATE).use {
+            it.write(fileContents.toByteArray())
+        }
+
     }
 }
