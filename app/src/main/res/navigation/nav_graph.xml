@@ -15,6 +15,12 @@
             android:id="@+id/action_welcome_to_onboard"
             app:destination="@id/onboard"
             />
+        <action
+            android:id="@+id/action_welcome_to_home"
+            app:destination="@id/home" />
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/login" />
 
     </fragment>
 
@@ -28,12 +34,6 @@
             android:id="@+id/action_onboard_to_signUp"
             app:destination="@id/signUp"
         />
-        <action
-            android:id="@+id/action_onboard_to_home"
-            app:destination="@id/home" />
-        <action
-            android:id="@+id/action_onboard_to_login"
-            app:destination="@id/login" />
     </fragment>
 
     <fragment

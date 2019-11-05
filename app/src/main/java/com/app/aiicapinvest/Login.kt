@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -101,7 +102,10 @@ class Login : Fragment(), View.OnClickListener {
             val response = JSONObject(result!!)
             if(response.has("access_token")){
                 Toast.makeText(ctx, "login successful", Toast.LENGTH_SHORT).show()
-                navController.navigate(R.id.action_login_to_home)
+
+                save_user_data(response.get("logged_in_user").toString())
+                navController.navigate(R.id.action_login_to_home, null,
+                    NavOptions.Builder().setPopUpTo(R.id.login, true).build())
             }
         }
     }
@@ -122,12 +126,9 @@ class Login : Fragment(), View.OnClickListener {
         fw.close()
     }
 
-    private fun write(){
-        val filename = "logged_in"
-        val fileContents = "true"
-        context!!.openFileOutput(filename, Context.MODE_PRIVATE).use {
-            it.write(fileContents.toByteArray())
+    private fun save_user_data(data: String){
+        context!!.openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
+            it.write(data.toByteArray())
         }
-
     }
 }

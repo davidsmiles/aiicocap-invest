@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.app.aiicapinvest.adapters.Slider
@@ -37,28 +38,7 @@ class Onboard : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        pop()
         setupViews()
-    }
-
-    /**
-     *  Decide if User has logged in before and take them to home page
-     *  if(file.exists) returns true if User has launched the App before and if true,
-     *  Then move Users straight to Login page without showing them the onboarding screens.
-     */
-    private fun pop(){
-        val file = File("${context!!.cacheDir.path}/logged_in.txt")
-        if(file.exists()) {
-            val fw = FileReader(file)
-            when (fw.readText()) {
-                "true" -> {
-                    navController.navigate(R.id.action_onboard_to_home)
-                }
-                else -> {
-                    navController.navigate(R.id.action_onboard_to_login)
-                }
-            }
-        }
     }
 
     private fun setupViews(){
@@ -70,8 +50,8 @@ class Onboard : Fragment(){
         addDotsIndicator(0)
 
         skip.setOnClickListener{
-            navController.navigate(R.id.action_onboard_to_signUp, null)
-            //    NavOptions.Builder().setPopUpTo(R.id.onboard, true).build())
+            navController.navigate(R.id.action_onboard_to_signUp, null,
+                NavOptions.Builder().setPopUpTo(R.id.onboard, true).build())
         }
     }
 

@@ -56,7 +56,7 @@ class SignUp : Fragment(), View.OnClickListener {
                 payload.put("firstname", firstname)
                 payload.put("lastname", lastname)
                 payload.put("email", email)
-                payload.put("phone", phone)
+            //    payload.put("phone", phone)
                 payload.put("password", password)
 
                 Signup(context!!).execute(payload.toString())
@@ -99,7 +99,6 @@ class SignUp : Fragment(), View.OnClickListener {
             super.onPostExecute(result)
 
             dialog.dismiss()
-            Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show()
 
 
             val response = JSONObject(result!!)
