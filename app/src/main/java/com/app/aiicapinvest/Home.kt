@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -73,9 +72,15 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             R.id.logout -> {
                 AlertDialog.Builder(this, R.style.MyDialogTheme)
                     .setMessage(String.format(Locale.getDefault(), "Are you sure you want to logout?"))
-                    .setPositiveButton(String.format(Locale.getDefault(), "YES")) { _, _ ->
-                        cacheUser(false)
-                     //   navController.navigate(R.id.action_home_to_login)
+                    .setPositiveButton(String.format(Locale.getDefault(), "YES")) {_, _ ->
+
+                        false.cacheUser()
+                        deleteFile("user_data.txt")
+
+                        Intent(this@Home, Login::class.java).apply {
+                            startActivity(this)
+                            finish()
+                        }
                     }
                     .setNegativeButton(String.format(Locale.getDefault(), "NO")) { _, _ -> }
                     .create()
@@ -89,13 +94,13 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
      *  Snippet responsible for caching the User to ensure
      *  consequent times the User doesn't need to login after the first time
      */
-    private fun cacheUser(status: Boolean) {
+    private fun Boolean.cacheUser() {
         /**
          *  Handling the Sessioning of the User
          */
         val file = File("${cacheDir.path}/logged_in.txt")
         val fw = FileWriter(file)
-        fw.write(status.toString())
+        fw.write(toString())
         fw.close()
     }
 
