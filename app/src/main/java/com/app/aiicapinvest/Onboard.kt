@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.text.Html
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.viewpager.widget.ViewPager
 import com.app.aiicapinvest.adapters.Slider
 import kotlinx.android.synthetic.main.fragment_onboard.*
@@ -15,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_onboard.*
 
 class Onboard : AppCompatActivity(){
 
-    lateinit var navController: NavController
     lateinit var sliderAdapter: Slider
 
     var _currentpage = 0
@@ -39,8 +36,6 @@ class Onboard : AppCompatActivity(){
                 startActivity(this)
                 finish()
             }
-//            navController.navigate(R.id.action_onboard_to_signUp, null,
-//                NavOptions.Builder().setPopUpTo(R.id.onboard, true).build())
         }
     }
 

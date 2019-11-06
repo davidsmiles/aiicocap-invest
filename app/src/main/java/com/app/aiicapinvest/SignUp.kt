@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.json.JSONObject
@@ -17,8 +16,6 @@ import java.util.*
 
 
 class SignUp : AppCompatActivity(), View.OnClickListener {
-
-    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +52,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
                 }
             }
             login.id -> {
-                // navController.navigate(R.id.action_signUp_to_login)
                 Intent(this@SignUp, Login::class.java).apply {
                     startActivity(this)
                     finish()
@@ -103,7 +99,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
             val response = JSONObject(result!!)
             if(response.has("email")) {
                 Toast.makeText(context, response.getString("email"), Toast.LENGTH_SHORT).show()
-                // navController.navigate(R.id.action_signUp_to_home)
 
                 Intent(context, Home::class.java).apply {
                     startActivity(this)

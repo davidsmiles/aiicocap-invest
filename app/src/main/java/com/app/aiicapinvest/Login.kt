@@ -6,30 +6,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter
-import java.net.MalformedURLException
-import java.net.URL
 import java.util.*
 
 
 class Login : AppCompatActivity(), View.OnClickListener {
-
-    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -58,8 +46,6 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 }
             }
             sign_up.id -> {
-                // navController.navigate(R.id.action_login_to_signUp)
-
                 Intent(this@Login, SignUp::class.java).apply {
                     startActivity(this)
                 }
@@ -118,10 +104,6 @@ class Login : AppCompatActivity(), View.OnClickListener {
                     startActivity(it)
                     finish()
                 }
-                /*
-                navController.navigate(R.id.action_login_to_home, null,
-                    NavOptions.Builder().setPopUpTo(R.id.login, false).build())
-                 */
             }
         }
     }
