@@ -3,12 +3,15 @@ package com.app.aiicapinvest
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -23,23 +26,13 @@ import java.net.URL
 import java.util.*
 
 
-class Login : Fragment(), View.OnClickListener {
-
-    var cacheUser = false
+class Login : AppCompatActivity(), View.OnClickListener {
 
     lateinit var navController: NavController
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_login)
 
         login.setOnClickListener(this)
         sign_up.setOnClickListener(this)
@@ -55,13 +48,19 @@ class Login : Fragment(), View.OnClickListener {
                 payload.put("email", email)
                 payload.put("password", password)
 
-                Login(context!!).execute(payload.toString())
+                Login(this).execute(payload.toString())
             }
-            sign_up.id -> navController.navigate(R.id.action_login_to_signUp)
+            sign_up.id -> {
+                // navController.navigate(R.id.action_login_to_signUp)
+
+                Intent(this@Login, SignUp::class.java).apply {
+                    startActivity(this)
+                }
+            }
         }
     }
 
-    internal inner class Login(var ctx: Context) : AsyncTask<String, Void, String>() {
+    internal inner class Login(var context: Context) : AsyncTask<String, Void, String>() {
 
         lateinit var dialog: AlertDialog
 
@@ -69,10 +68,10 @@ class Login : Fragment(), View.OnClickListener {
             super.onPreExecute()
 
             // Save User logged_in status to Cache
-            cacheUser()
+            cacheUser(remember_me.isChecked)
 
             dialog = SpotsDialog.Builder()
-                .setContext(ctx)
+                .setContext(context)
                 .setMessage(String.format(Locale.getDefault(), "Processing..."))
                 .setCancelable(false)
                 .setTheme(R.style.Custom)
@@ -99,13 +98,23 @@ class Login : Fragment(), View.OnClickListener {
 
             dialog.dismiss()
 
+            /**
+             *  Check that the API returns a response containing an access_token, a refresh_token
+             *  and logged_in_user data.
+             */
             val response = JSONObject(result!!)
             if(response.has("access_token")){
-                Toast.makeText(ctx, "login successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "login successful", Toast.LENGTH_SHORT).show()
 
                 save_user_data(response.get("logged_in_user").toString())
+                Intent(context, Home::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
+                /*
                 navController.navigate(R.id.action_login_to_home, null,
-                    NavOptions.Builder().setPopUpTo(R.id.login, true).build())
+                    NavOptions.Builder().setPopUpTo(R.id.login, false).build())
+                 */
             }
         }
     }
@@ -114,21 +123,20 @@ class Login : Fragment(), View.OnClickListener {
      *  Snippet responsible for caching the User to ensure
      *  consequent times the User doesn't need to login after the first time
      */
-    private fun cacheUser() {
+    private fun cacheUser(status: Boolean) {
         /**
          *  Handling the Sessioning of the User
          */
-        cacheUser = remember_me.isChecked
-
-        val file = File("${context!!.cacheDir.path}/logged_in.txt")
+        val file = File("${cacheDir.path}/logged_in.txt")
         val fw = FileWriter(file)
-        fw.write(cacheUser.toString())
+        fw.write(status.toString())
         fw.close()
     }
 
     private fun save_user_data(data: String){
-        context!!.openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
+        openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
             it.write(data.toByteArray())
+            it.close()
         }
     }
 }

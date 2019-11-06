@@ -1,9 +1,11 @@
 package com.app.aiicapinvest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -11,6 +13,9 @@ import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.Navigation
 import androidx.core.view.GravityCompat
+import java.io.File
+import java.io.FileWriter
+import java.util.*
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -65,9 +70,33 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             R.id.wallet -> navController.navigate(R.id.walletFragment)
             R.id.invest -> navController.navigate(R.id.investFragment)
             R.id.withdrawals -> navController.navigate(R.id.withdrawalsFragment)
-            R.id.logout -> Toast.makeText(this, "not yet implemented", Toast.LENGTH_SHORT).show()
+            R.id.logout -> {
+                AlertDialog.Builder(this, R.style.MyDialogTheme)
+                    .setMessage(String.format(Locale.getDefault(), "Are you sure you want to logout?"))
+                    .setPositiveButton(String.format(Locale.getDefault(), "YES")) { _, _ ->
+                        cacheUser(false)
+                     //   navController.navigate(R.id.action_home_to_login)
+                    }
+                    .setNegativeButton(String.format(Locale.getDefault(), "NO")) { _, _ -> }
+                    .create()
+                    .show()
+            }
         }
         return true
+    }
+
+    /**
+     *  Snippet responsible for caching the User to ensure
+     *  consequent times the User doesn't need to login after the first time
+     */
+    private fun cacheUser(status: Boolean) {
+        /**
+         *  Handling the Sessioning of the User
+         */
+        val file = File("${cacheDir.path}/logged_in.txt")
+        val fw = FileWriter(file)
+        fw.write(status.toString())
+        fw.close()
     }
 
     override fun onBackPressed() {

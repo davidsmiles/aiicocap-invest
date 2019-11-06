@@ -1,12 +1,14 @@
 package com.app.aiicapinvest
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
@@ -14,22 +16,13 @@ import java.io.File
 import java.io.FileReader
 
 
-class Welcome : Fragment() {
-
+class Welcome : AppCompatActivity() {
 
     lateinit var navController: NavController
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_welcome)
 
         splash()
     }
@@ -47,22 +40,36 @@ class Welcome : Fragment() {
      *  Then move Users straight to Login page without showing them the onboarding screens.
      */
     private fun pop(){
-        val file = File("${context!!.cacheDir.path}/logged_in.txt")
+        val file = File("${cacheDir.path}/logged_in.txt")
         if(file.exists()) {
             val fw = FileReader(file)
             when (fw.readText()) {
                 "true" -> {
-                    navController.navigate(R.id.action_welcome_to_home, null,
-                        NavOptions.Builder().setPopUpTo(R.id.welcome, true).build())
+                    Intent(this@Welcome, Home::class.java).apply {
+                        startActivity(this)
+                        finish()
+                    }
+//                  navController.navigate(R.id.action_welcome_to_home, null,
+//                        NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build())
                 }
                 else -> {
-                    navController.navigate(R.id.action_welcome_to_login, null,
-                        NavOptions.Builder().setPopUpTo(R.id.welcome, true).build())
+//                  navController.navigate(R.id.action_welcome_to_login, null,
+//                        NavOptions.Builder().setPopUpTo(R.id.login, true).build())
+                    Intent(this@Welcome, Login::class.java).apply {
+                        startActivity(this)
+                        finish()
+                    }
                 }
             }
         }
-        else navController.navigate(R.id.action_welcome_to_onboard, null,
-            NavOptions.Builder().setPopUpTo(R.id.welcome, true).build())
+        else {
+            Intent(this@Welcome, Onboard::class.java).apply {
+                startActivity(this)
+                finish()
+            }
+//            navController.navigate(R.id.action_welcome_to_onboard, null,
+//                NavOptions.Builder().setPopUpTo(R.id.welcome, true).build())
+        }
     }
 
 }
