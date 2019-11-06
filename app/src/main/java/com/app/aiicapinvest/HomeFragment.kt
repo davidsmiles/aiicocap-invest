@@ -6,6 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_home.*
+import org.json.JSONObject
+import java.io.BufferedInputStream
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.Reader
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -18,4 +25,23 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        load_user_info()
+    }
+
+    private fun load_user_info(){
+        var data: String? = null
+        context!!.openFileInput("user_data.txt").use{
+            val ins = InputStreamReader(it)
+            val bis = BufferedReader(ins)
+            data = bis.readText()
+        }
+
+        JSONObject(data!!).also {
+            val firstname = it.getString("firstname")
+            val lastname = it.getString("lastname")
+
+            welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
+        }
+    }
 }

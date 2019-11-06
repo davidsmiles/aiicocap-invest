@@ -14,21 +14,21 @@
         android:background="@drawable/home_gradient">
 
         <TextView
+            android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome, David Ugbero"
             android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
-            android:padding="@dimen/thirty" />
+            android:padding="@dimen/fifteen" />
 
-<!--        <ImageView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_card_display"-->
-<!--            android:padding="@dimen/fifteen"-->
-<!--            android:layout_gravity="center"-->
-<!--        />-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_card_display"
+            android:padding="@dimen/fifteen"
+            android:layout_gravity="center"
+        />
 
         <View
             android:layout_width="match_parent"
