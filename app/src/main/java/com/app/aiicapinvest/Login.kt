@@ -18,6 +18,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter
@@ -48,7 +49,13 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 payload.put("email", email)
                 payload.put("password", password)
 
-                Login(this).execute(payload.toString())
+                if(Helper.isNetworkConnected(this)) Login(this).execute(payload.toString())
+                else{
+                    AlertDialog.Builder(this).setTitle("No Internet Connection")
+                        .setMessage("Please check your internet connection and try again")
+                        .setPositiveButton(android.R.string.ok) { _, _ -> }
+                        .setIcon(android.R.drawable.ic_dialog_alert).show()
+                }
             }
             sign_up.id -> {
                 // navController.navigate(R.id.action_login_to_signUp)
@@ -104,7 +111,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
              */
             val response = JSONObject(result!!)
             if(response.has("access_token")){
-                Toast.makeText(context, "login successful", Toast.LENGTH_SHORT).show()
+                toast("login successful")
 
                 save_user_data(response.get("logged_in_user").toString())
                 Intent(context, Home::class.java).also {

@@ -46,7 +46,13 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
             //    payload.put("phone", phone)
                 payload.put("password", password)
 
-                Signup(this).execute(payload.toString())
+                if(Helper.isNetworkConnected(this)) Signup(this).execute(payload.toString())
+                else{
+                    AlertDialog.Builder(this).setTitle("No Internet Connection")
+                        .setMessage("Please check your internet connection and try again")
+                        .setPositiveButton(android.R.string.ok) { _, _ -> }
+                        .setIcon(android.R.drawable.ic_dialog_alert).show()
+                }
             }
             login.id -> {
                 // navController.navigate(R.id.action_signUp_to_login)
