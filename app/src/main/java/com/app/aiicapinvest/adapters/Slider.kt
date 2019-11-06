@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import com.app.aiicapinvest.R
 
@@ -15,7 +16,7 @@ class Slider(internal var context: Context): PagerAdapter(){
 
     lateinit var inflater: LayoutInflater
 
-    var slide_images = intArrayOf(R.drawable.code_icon, R.drawable.eat_icon, R.drawable.sleep_icon)
+    var slide_images = intArrayOf(R.drawable.onboard5, R.drawable.onboard3_vint, R.drawable.onboard4)
 
     var slide_descs = arrayOf(
         "No fees to set up your investments or maintain them.",
@@ -35,10 +36,9 @@ class Slider(internal var context: Context): PagerAdapter(){
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.slide_layout, container, false)
 
-        val image = view.findViewById(R.id.image) as ImageView
+        view.background = ContextCompat.getDrawable(context, slide_images[position])
         val desc = view.findViewById(R.id.desc) as TextView
 
-        image.setImageResource(slide_images[position])
         desc.text = slide_descs[position]
 
         container.addView(view)

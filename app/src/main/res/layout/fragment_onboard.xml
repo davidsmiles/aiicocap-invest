@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/onboard4"
     tools:context=".Onboard">
 
     <androidx.viewpager.widget.ViewPager
@@ -18,20 +18,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/skip"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/fifteen"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-    />
+        />
 
     <Button
         android:id="@+id/skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/skip"
-        android:textColor="@color/white"
-        android:background="#0000ffff"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentBottom="true"
+        android:textColor="@color/black"
+        android:background="@drawable/onboard_skip"
+        android:layout_marginBottom="1sp"
+        android:layout_above="@id/dotslayout"
         android:layout_centerHorizontal="true"
     />
+
+
 </RelativeLayout>
