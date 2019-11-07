@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,8 +14,12 @@ import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.Navigation
 import androidx.core.view.GravityCompat
+import org.jetbrains.anko.find
+import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.File
 import java.io.FileWriter
+import java.io.InputStreamReader
 import java.util.*
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +58,33 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         navigationView.setNavigationItemSelectedListener(this)
 
+        setupNavHeader()
+    }
+
+    private fun setupNavHeader(){
+        val headerLayout = navigationView.inflateHeaderView(R.layout.header_layout)
+        val user_name = headerLayout.find<AppCompatTextView>(R.id.user_name)
+        val user_email = headerLayout.find<AppCompatTextView>(R.id.email_address)
+        val user_info = loadUserInfo()
+        user_name.text = user_info.first
+        user_email.text = user_info.second
+    }
+
+    private fun loadUserInfo(): Pair<String, String>{
+        var data: String? = null
+        openFileInput("user_data.txt").use{
+            val ins = InputStreamReader(it)
+            val bis = BufferedReader(ins)
+            data = bis.readText()
+        }
+
+        JSONObject(data!!).also {
+            val firstname = it.getString("firstname")
+            val lastname = it.getString("lastname")
+            val email = it.getString("email")
+
+            return Pair(String.format(Locale.getDefault(), "$firstname $lastname"), email)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
