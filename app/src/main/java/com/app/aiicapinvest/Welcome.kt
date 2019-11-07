@@ -27,7 +27,7 @@ class Welcome : AppCompatActivity() {
 
     /**
      *  Decide if User has logged in before and take them to home page
-     *  if(file.exists) returns true if User has launched the App before and if true,
+     *  if[file.exists()] returns true if User has launched the App before and if true,
      *  Then move Users straight to Login page without showing them the onboarding screens.
      */
     private fun pop(){

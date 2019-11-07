@@ -40,10 +40,14 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
                 if(Helper.isNetworkConnected(this)) Login(this).execute(payload.toString())
                 else{
-                    AlertDialog.Builder(this).setTitle("No Internet Connection")
-                        .setMessage("Please check your internet connection and try again")
-                        .setPositiveButton(android.R.string.ok) { _, _ -> }
-                        .setIcon(android.R.drawable.ic_dialog_alert).show()
+                    alert {
+                        title = "No Internet Connection"
+                        message = "Please check your internet connection and try again"
+                        iconResource = android.R.drawable.ic_dialog_alert
+                        positiveButton(android.R.string.ok, {})
+                        build()
+                        show()
+                    }
                 }
             }
             sign_up.id -> {
