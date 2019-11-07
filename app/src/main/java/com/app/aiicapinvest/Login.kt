@@ -10,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.io.File
@@ -60,9 +61,6 @@ class Login : AppCompatActivity(), View.OnClickListener {
         override fun onPreExecute() {
             super.onPreExecute()
 
-            // Save User logged_in status to Cache
-            cacheUser(remember_me.isChecked)
-
             dialog = SpotsDialog.Builder()
                 .setContext(context)
                 .setMessage(String.format(Locale.getDefault(), "Processing..."))
@@ -99,10 +97,22 @@ class Login : AppCompatActivity(), View.OnClickListener {
             if(response.has("access_token")){
                 toast("login successful")
 
+                // Save User logged_in status to Cache only when login is successful
+                cacheUser(remember_me.isChecked)
+
+                // and save User's data
                 save_user_data(response.get("logged_in_user").toString())
                 Intent(context, Home::class.java).also {
                     startActivity(it)
                     finish()
+                }
+            }
+            else {
+                alert {
+                    message = "There was an error somewhere. Please check that your username or password is correct."
+                    positiveButton("OK", {})
+                    build()
+                    show()
                 }
             }
         }

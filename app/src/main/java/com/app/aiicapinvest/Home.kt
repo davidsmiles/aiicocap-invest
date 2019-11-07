@@ -83,7 +83,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             val lastname = it.getString("lastname")
             val email = it.getString("email")
 
-            return Pair(String.format(Locale.getDefault(), "$firstname $lastname"), email)
+            return Pair("$firstname $lastname", email)
         }
     }
 
