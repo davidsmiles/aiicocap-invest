@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadUserInfo()
+       // loadUserInfo()
     }
 
     private fun loadUserInfo(){
@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
             val firstname = it.getString("firstname")
             val lastname = it.getString("lastname")
 
-            welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
+            //welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
         }
     }
 }
