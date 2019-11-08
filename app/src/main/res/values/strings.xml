@@ -17,7 +17,7 @@
     <string name="log_in">Log In</string>
     <string name="confirmpassword">Confirm Password</string>
     <string name="already_have_an_acc">Already have an account?</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_an_acc">Don\'t have an account?</string>
     <string name="register">REGISTER</string>
     <string name="remember_me">Keep me logged in</string>

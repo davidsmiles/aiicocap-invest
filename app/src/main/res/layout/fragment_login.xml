@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:background="@color/white"
     tools:context=".Login">
 
     <RelativeLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/log_in"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textStyle="bold"/>
 
         <EditText
@@ -51,8 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/remember_me"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
+            android:textColor="@color/black"
+            android:buttonTint="@color/main_color"
             android:checked="true"
             android:layout_marginTop="@dimen/five"
             android:layout_below="@+id/password"
@@ -64,8 +64,8 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:textStyle="bold"
-            android:textColor="@color/main_color"
-            android:background="@drawable/button_login"
+            android:textColor="@color/white"
+            android:background="@drawable/button_signup"
             android:layout_marginTop="@dimen/thirty"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/remember_me"/>
@@ -74,8 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
+            android:textSize="@dimen/fifteen"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_below="@+id/login"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/twenty"
@@ -88,7 +89,7 @@
         android:layout_height="wrap_content"
         android:text="@string/dont_have_an_acc"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/thirty"
     />
@@ -99,8 +100,8 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/button_signup"
+        android:textColor="@color/main_color"
+        android:background="@drawable/button_login"
         android:layout_marginStart="@dimen/thirty"
         android:layout_marginEnd="@dimen/thirty"
         android:layout_marginTop="@dimen/ten"

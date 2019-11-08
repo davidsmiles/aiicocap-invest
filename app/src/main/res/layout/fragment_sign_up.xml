@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="@string/signup"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textStyle="bold" />
 
         <EditText
@@ -101,8 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/iagree"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
+            android:textColor="@color/black"
+            android:buttonTint="@color/main_color"
             android:layout_marginTop="20sp"
             android:layout_below="@+id/confirm_password"
         />
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/already_have_an_acc"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
             />
 
             <TextView
