@@ -54,7 +54,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
             login.id -> {
                 Intent(this@SignUp, Login::class.java).apply {
                     startActivity(this)
-                    finish()
                 }
             }
         }
@@ -100,11 +99,19 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
             if(response.has("email")) {
                 Toast.makeText(context, response.getString("email"), Toast.LENGTH_SHORT).show()
 
+                save_user_data(result)
                 Intent(context, Home::class.java).apply {
                     startActivity(this)
                     finish()
                 }
             }
+        }
+    }
+
+    private fun save_user_data(data: String){
+        openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
+            it.write(data.toByteArray())
+            it.close()
         }
     }
 }
