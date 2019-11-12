@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -39,7 +37,7 @@ class HomeFragment : Fragment() {
             val firstname = it.getString("firstname")
             val lastname = it.getString("lastname")
 
-            welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
+        //    welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
         }
     }
 }

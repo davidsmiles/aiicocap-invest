@@ -98,8 +98,6 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
 
             val response = JSONObject(result!!)
             if(response.has("email")) {
-                Toast.makeText(context, response.getString("email"), Toast.LENGTH_SHORT).show()
-
                 User.save_user_data(context, result)
                 Intent(context, Home::class.java).apply {
                     startActivity(this)

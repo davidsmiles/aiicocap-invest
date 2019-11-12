@@ -19,4 +19,5 @@
     <dimen name="one">1sp</dimen>
     <dimen name="twentyfour">24sp</dimen>
     <dimen name="twelve">12sp</dimen>
+    <dimen name="two">2sp</dimen>
 </resources>

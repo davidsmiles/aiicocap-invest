@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Onboard" />
-        <activity android:name=".SignUp" android:windowSoftInputMode="adjustResize|adjustPan"/>
-        <activity android:name=".Login" android:windowSoftInputMode="adjustResize|adjustPan"/>
+        <activity android:name=".SignUp" android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".Login" android:windowSoftInputMode="adjustPan|adjustResize"/>
     </application>
 
 </manifest>
