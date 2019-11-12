@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.app.aiicapinvest.models.User
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.json.JSONObject
@@ -99,7 +100,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
             if(response.has("email")) {
                 Toast.makeText(context, response.getString("email"), Toast.LENGTH_SHORT).show()
 
-                save_user_data(result)
+                User.save_user_data(context, result)
                 Intent(context, Home::class.java).apply {
                     startActivity(this)
                     finish()
@@ -108,10 +109,4 @@ class SignUp : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun save_user_data(data: String){
-        openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
-            it.write(data.toByteArray())
-            it.close()
-        }
-    }
 }

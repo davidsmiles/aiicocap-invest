@@ -8,6 +8,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.app.aiicapinvest.models.User
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.jetbrains.anko.alert
@@ -105,7 +106,8 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 cacheUser(remember_me.isChecked)
 
                 // and save User's data
-                save_user_data(response.get("logged_in_user").toString())
+                User.save_user_data(context, response.get("logged_in_user").toString())
+
                 Intent(context, Home::class.java).also {
                     startActivity(it)
                     finish()
@@ -134,12 +136,5 @@ class Login : AppCompatActivity(), View.OnClickListener {
         val fw = FileWriter(file)
         fw.write(status.toString())
         fw.close()
-    }
-
-    private fun save_user_data(data: String){
-        openFileOutput("user_data.txt", Context.MODE_PRIVATE).use {
-            it.write(data.toByteArray())
-            it.close()
-        }
     }
 }
