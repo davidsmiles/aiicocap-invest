@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -37,7 +39,23 @@ class HomeFragment : Fragment() {
             val firstname = it.getString("firstname")
             val lastname = it.getString("lastname")
 
-        //    welcome_text.text = String.format(Locale.getDefault(), "Welcome, $firstname $lastname")
+            greetings.text = String.format(Locale.getDefault(), "${getGreetingMessage()} $firstname")
         }
     }
+
+    fun getGreetingMessage():String{
+        val c = Calendar.getInstance()
+        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
+
+        return when (timeOfDay) {
+            in 0..11 -> "Good Morning"
+            in 12..15 -> "Good Afternoon"
+            in 16..20 -> "Good Evening"
+            in 21..23 -> "Good Night"
+            else -> {
+                "Hello"
+            }
+        }
+    }
+
 }

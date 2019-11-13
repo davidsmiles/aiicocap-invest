@@ -20,5 +20,4 @@ class PortfolioFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_portfolio, container, false)
     }
 
-
 }
