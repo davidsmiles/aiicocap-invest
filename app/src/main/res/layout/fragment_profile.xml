@@ -89,6 +89,7 @@
                     android:layout_toEndOf="@+id/icon_person">
 
                     <EditText
+                        android:id="@+id/fn"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:hint="@string/firstname"
@@ -108,6 +109,7 @@
                     android:layout_toEndOf="@+id/icon_person">
 
                     <EditText
+                        android:id="@+id/ln"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:hint="@string/lastname"
@@ -135,6 +137,7 @@
                     android:layout_toEndOf="@+id/icon_phone">
 
                     <EditText
+                        android:id="@+id/phone"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:hint="@string/phone"
@@ -164,6 +167,7 @@
                     android:layout_toEndOf="@+id/icon_email">
 
                     <EditText
+                        android:id="@+id/em"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:hint="@string/email"
