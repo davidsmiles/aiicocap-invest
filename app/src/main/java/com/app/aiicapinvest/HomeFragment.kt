@@ -39,11 +39,11 @@ class HomeFragment : Fragment() {
             val firstname = it.getString("firstname")
             val lastname = it.getString("lastname")
 
-            greetings.text = String.format(Locale.getDefault(), "${getGreetingMessage()} $firstname")
+            greetings.text = String.format(Locale.getDefault(), "${getGreetingMessage().capitalize()} $firstname.")
         }
     }
 
-    fun getGreetingMessage():String{
+    private fun getGreetingMessage(): String{
         val c = Calendar.getInstance()
         val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
 
