@@ -32,4 +32,12 @@
     <string name="addnewphoto">Add a new photo</string>
     <string name="personalinformation">PERSONAL INFORMATION</string>
     <string name="editpassword">Edit password</string>
+    <string name="residential_address">Residential Address</string>
+    <string name="spinner_title">Identity Card Type</string>
+
+    <string-array name="identity_type">
+        <item>National ID</item>
+        <item>Passport</item>
+        <item>Voter's Card</item>
+    </string-array>
 </resources>
