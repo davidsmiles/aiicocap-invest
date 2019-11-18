@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        (activity as AppCompatActivity).supportActionBar!!.title = ""
         loadUserInfo()
     }
 
@@ -40,8 +41,8 @@ class HomeFragment : Fragment() {
             val firstname = it.getString("firstname")
             val lastname = it.getString("lastname")
 
-            greetings.text = String.format(Locale.getDefault(), "${getGreetingMessage().capitalize()} $firstname.")
-        }
+            greetings.text = String.format(Locale.getDefault(), "${getGreetingMessage().capitalize()} ${firstname.capitalize()}.")
+        }                          
     }
 
     private fun getGreetingMessage(): String{
