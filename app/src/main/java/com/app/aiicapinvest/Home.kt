@@ -1,10 +1,12 @@
 package com.app.aiicapinvest
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
@@ -27,6 +29,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     lateinit var toolbar: Toolbar
 
     lateinit var drawerLayout: DrawerLayout
+    lateinit var toggle: ActionBarDrawerToggle
 
     lateinit var navController: NavController
 
@@ -43,13 +46,17 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         drawerLayout = findViewById(R.id.drawer_layout)
+        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+
 
         navigationView = findViewById(R.id.navigationView)
-
+        /*
         navController = Navigation.findNavController(this, R.id.nav_home_fragment)
 
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
@@ -57,6 +64,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         NavigationUI.setupWithNavController(navigationView, navController)
 
         navigationView.setNavigationItemSelectedListener(this)
+        */
 
         setupNavHeader()
     }
@@ -87,19 +95,31 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_home_fragment), drawerLayout);
+//    override fun onSupportNavigateUp(): Boolean {
+//        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_home_fragment), drawerLayout);
+//    }
+
+    private fun setTitle(title: String){
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         drawerLayout.closeDrawers()
 
-
+        var fragment = null
+/*
         when(menuItem.itemId) {
-            R.id.update_profile -> navController.navigate(R.id.profileFragment)
+            R.id.update_profile -> {
+                //navController.navigate(R.id.profileFragment)
+
+            }
             R.id.update_kyc -> navController.navigate(R.id.KYCFragment)
             R.id.home -> navController.navigate(R.id.homeFragment)
-            R.id.wallet -> navController.navigate(R.id.walletFragment)
+            R.id.wallet -> {
+                navController.navigate(R.id.walletFragment)
+            }
             R.id.invest -> navController.navigate(R.id.investFragment)
             R.id.withdrawals -> navController.navigate(R.id.withdrawalsFragment)
             R.id.logout -> {
@@ -120,7 +140,27 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                     .show()
             }
         }
+
+ */
         return true
+
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toggle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**

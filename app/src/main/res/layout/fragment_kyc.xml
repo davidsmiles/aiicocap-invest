@@ -93,9 +93,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date of Birth"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_below="@id/gender"/>
 
+        <TextView
+            android:id="@+id/date_of_birth_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12/34/24"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_below="@id/gender"
+            android:layout_margin="@dimen/fifteen"
+            android:layout_toEndOf="@id/date_of_birth"/>
 
         <Spinner
             android:id="@+id/spinner"
