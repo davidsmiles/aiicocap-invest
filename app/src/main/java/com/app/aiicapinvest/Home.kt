@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.Navigation
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import org.jetbrains.anko.find
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -53,6 +54,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
 
         navigationView = findViewById(R.id.navigationView)
@@ -62,9 +64,14 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
         NavigationUI.setupWithNavController(navigationView, navController)
-
+*/
         navigationView.setNavigationItemSelectedListener(this)
-        */
+
+
+        var fragment: Fragment = HomeFragment()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.flContent, fragment!!)
+        ft.commit()
 
         setupNavHeader()
     }
@@ -100,7 +107,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 //    }
 
     private fun setTitle(title: String){
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
@@ -108,20 +115,33 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         drawerLayout.closeDrawers()
 
-        var fragment = null
-/*
+        var fragment: Fragment = HomeFragment()
+
         when(menuItem.itemId) {
             R.id.update_profile -> {
                 //navController.navigate(R.id.profileFragment)
-
+                fragment = ProfileFragment()
             }
-            R.id.update_kyc -> navController.navigate(R.id.KYCFragment)
-            R.id.home -> navController.navigate(R.id.homeFragment)
+            R.id.update_kyc -> {
+                // navController.navigate(R.id.KYCFragment)
+                fragment = KYCFragment()
+            }
+            R.id.home -> {
+                // navController.navigate(R.id.homeFragment)
+                fragment = HomeFragment()
+            }
             R.id.wallet -> {
-                navController.navigate(R.id.walletFragment)
+                // navController.navigate(R.id.walletFragment)
+                fragment = WalletFragment()
             }
-            R.id.invest -> navController.navigate(R.id.investFragment)
-            R.id.withdrawals -> navController.navigate(R.id.withdrawalsFragment)
+            R.id.invest -> {
+                // navController.navigate(R.id.investFragment)
+                fragment = InvestFragment()
+            }
+            R.id.withdrawals -> {
+                // navController.navigate(R.id.withdrawalsFragment)
+                fragment = WithdrawalsFragment()
+            }
             R.id.logout -> {
                 AlertDialog.Builder(this, R.style.MyDialogTheme)
                     .setMessage(String.format(Locale.getDefault(), "Are you sure you want to logout?"))
@@ -139,9 +159,16 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                     .create()
                     .show()
             }
+            else -> {
+                fragment = HomeFragment()
+            }
         }
 
- */
+
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.flContent, fragment!!)
+            ft.commit()
+
         return true
 
     }
