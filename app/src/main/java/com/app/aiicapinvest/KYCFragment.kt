@@ -43,7 +43,6 @@ class KYCFragment : Fragment() {
                 }, year, month, day
             )
             datePicker.show()
-
         }
     }
 }

@@ -68,9 +68,9 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         navigationView.setNavigationItemSelectedListener(this)
 
 
-        var fragment: Fragment = HomeFragment()
+        val fragment: Fragment = HomeFragment()
         val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.flContent, fragment!!)
+        ft.replace(R.id.flContent, fragment)
         ft.commit()
 
         setupNavHeader()
@@ -120,26 +120,32 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         when(menuItem.itemId) {
             R.id.update_profile -> {
                 //navController.navigate(R.id.profileFragment)
+                toolbar.title = getString(R.string.update_profile)
                 fragment = ProfileFragment()
             }
             R.id.update_kyc -> {
                 // navController.navigate(R.id.KYCFragment)
+                toolbar.title = getString(R.string.update_kyc)
                 fragment = KYCFragment()
             }
             R.id.home -> {
                 // navController.navigate(R.id.homeFragment)
+                toolbar.title = ""
                 fragment = HomeFragment()
             }
             R.id.wallet -> {
                 // navController.navigate(R.id.walletFragment)
+                toolbar.title = getString(R.string.wallet)
                 fragment = WalletFragment()
             }
             R.id.invest -> {
                 // navController.navigate(R.id.investFragment)
+                toolbar.title = getString(R.string.invest)
                 fragment = InvestFragment()
             }
             R.id.withdrawals -> {
                 // navController.navigate(R.id.withdrawalsFragment)
+                toolbar.title = getString(R.string.withdrawals)
                 fragment = WithdrawalsFragment()
             }
             R.id.logout -> {
@@ -160,13 +166,14 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                     .show()
             }
             else -> {
+                toolbar.title = ""
                 fragment = HomeFragment()
             }
         }
 
 
             val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.flContent, fragment!!)
+            ft.replace(R.id.flContent, fragment)
             ft.commit()
 
         return true
