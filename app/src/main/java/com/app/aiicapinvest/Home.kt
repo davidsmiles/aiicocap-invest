@@ -52,26 +52,19 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
 
 
         navigationView = findViewById(R.id.navigationView)
-        /*
+
         navController = Navigation.findNavController(this, R.id.nav_home_fragment)
 
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
         NavigationUI.setupWithNavController(navigationView, navController)
-*/
+
         navigationView.setNavigationItemSelectedListener(this)
 
-
-        val fragment: Fragment = HomeFragment()
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.flContent, fragment)
-        ft.commit()
+        toolbar.title = ""
 
         setupNavHeader()
     }
@@ -102,14 +95,17 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         }
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_home_fragment), drawerLayout);
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_home_fragment), drawerLayout);
+    }
 
-    private fun setTitle(title: String){
-        supportActionBar!!.setDisplayShowTitleEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                toolbar.title = ""
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
@@ -119,34 +115,34 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         when(menuItem.itemId) {
             R.id.update_profile -> {
-                //navController.navigate(R.id.profileFragment)
+                navController.navigate(R.id.profileFragment)
                 toolbar.title = getString(R.string.update_profile)
-                fragment = ProfileFragment()
+                //fragment = ProfileFragment()
             }
             R.id.update_kyc -> {
-                // navController.navigate(R.id.KYCFragment)
+                navController.navigate(R.id.KYCFragment)
                 toolbar.title = getString(R.string.update_kyc)
-                fragment = KYCFragment()
+                //fragment = KYCFragment()
             }
             R.id.home -> {
-                // navController.navigate(R.id.homeFragment)
+                navController.navigate(R.id.homeFragment)
                 toolbar.title = ""
-                fragment = HomeFragment()
+                //fragment = HomeFragment()
             }
             R.id.wallet -> {
-                // navController.navigate(R.id.walletFragment)
+                navController.navigate(R.id.walletFragment)
                 toolbar.title = getString(R.string.wallet)
-                fragment = WalletFragment()
+                //fragment = WalletFragment()
             }
             R.id.invest -> {
-                // navController.navigate(R.id.investFragment)
+                navController.navigate(R.id.investFragment)
                 toolbar.title = getString(R.string.invest)
-                fragment = InvestFragment()
+                //fragment = InvestFragment()
             }
             R.id.withdrawals -> {
-                // navController.navigate(R.id.withdrawalsFragment)
+                navController.navigate(R.id.withdrawalsFragment)
                 toolbar.title = getString(R.string.withdrawals)
-                fragment = WithdrawalsFragment()
+                //fragment = WithdrawalsFragment()
             }
             R.id.logout -> {
                 AlertDialog.Builder(this, R.style.MyDialogTheme)
@@ -167,34 +163,11 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             }
             else -> {
                 toolbar.title = ""
-                fragment = HomeFragment()
             }
         }
 
-
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.flContent, fragment)
-            ft.commit()
-
         return true
 
-    }
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        toggle.syncState()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        toggle.onConfigurationChanged(newConfig)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     /**
@@ -215,6 +188,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         when {
             drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawer(GravityCompat.START)
             else -> {
+                toolbar.title = ""
                 super.onBackPressed()
             }
         }
