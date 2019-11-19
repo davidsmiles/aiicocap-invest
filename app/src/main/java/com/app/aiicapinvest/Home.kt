@@ -1,22 +1,20 @@
 package com.app.aiicapinvest
 
 import android.content.Intent
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.Navigation
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.navigation.NavigationView
 import org.jetbrains.anko.find
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -43,7 +41,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         setupNavigation()
     }
 
-    private fun setupNavigation() {
+    private fun setupNavigation(){
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -52,7 +50,6 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         drawerLayout = findViewById(R.id.drawer_layout)
-
 
         navigationView = findViewById(R.id.navigationView)
 
@@ -63,8 +60,6 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         NavigationUI.setupWithNavController(navigationView, navController)
 
         navigationView.setNavigationItemSelectedListener(this)
-
-        toolbar.title = ""
 
         setupNavHeader()
     }
